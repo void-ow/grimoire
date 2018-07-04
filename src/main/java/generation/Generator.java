@@ -10,6 +10,7 @@ import static init.featureBanks.RoomFeatureBanks.*;
 public class Generator {
 
     private static final int FEATURE_GENERATION_THRESHOLD = 15;
+    private static final int PERCEPTION_FLOOR = 14;
 
     public static Room generateRoom() {
         Room generated = new Room();
@@ -20,7 +21,7 @@ public class Generator {
 
         for (int i = 0; i < roomFeatureBanks.size(); i++) {
             if (DTwenty.roll() >= FEATURE_GENERATION_THRESHOLD) {
-                addFeatureBankToRoom(generated, roomFeatureBanks.get(i));
+                addFeatureBankToRoomWithRandomDifficulty(generated, roomFeatureBanks.get(i));
             }
         }
 
@@ -29,6 +30,14 @@ public class Generator {
 
     private static void addFeatureBankToRoom(Room room, FeatureBank featureBank) {
         Feature feature = new Feature(featureBank);
+        feature.setKnown(true);
+        room.getFeatureList().add(feature);
+    }
+
+    private static void addFeatureBankToRoomWithRandomDifficulty(Room room, FeatureBank featureBank) {
+        Feature feature = new Feature(featureBank);
+        feature.setKnown(false);
+        feature.setDifficulty(DTwenty.rollWithFloor(PERCEPTION_FLOOR));
         room.getFeatureList().add(feature);
     }
 

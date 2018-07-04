@@ -16,7 +16,7 @@ public class RoomFeatureBanks {
     public static List<FeatureBank> roomRequiredFeatureBanks = new ArrayList<>();
 
     public static void initialize() {
-        roomRequiredFeatureBanks = readFromFeatureBank("room_required.fbs");
         roomFeatureBanks = readFromFeatureBank("room_optional.fbs");
+        roomRequiredFeatureBanks = readFromFeatureBank("room_required.fbs");
     }
 }

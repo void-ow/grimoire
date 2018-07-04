@@ -8,6 +8,8 @@ public class Feature {
 
     private String name;
     private String severity;
+    private boolean known;
+    private int difficulty;
 
     public Feature(String name, String severity) {
         this.name = name;
@@ -15,8 +17,8 @@ public class Feature {
     }
 
     public Feature(FeatureBank featureBank) {
-        this.name = featureBank.getName();
-        this.severity = featureBank.getSeverities().get(BaseDie.roll(featureBank.getSeverities().size() - 1));
+        name = featureBank.getName();
+        severity = featureBank.getSeverities().get(BaseDie.roll(featureBank.getSeverities().size() - 1));
     }
 
     @Override

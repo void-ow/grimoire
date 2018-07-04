@@ -12,8 +12,20 @@ public class DTwenty {
         return BaseDie.roll(sides);
     }
 
-    public static void rollAndPrint() {
-        final String message = String.format(SystemText.DICE_ROLL, name, roll());
+    public static int rollWithFloor(int floor) {
+        int roll = BaseDie.roll(sides);
+        if (roll < floor) {
+            roll = floor;
+        }
+        return roll;
+    }
+
+    public static int rollAndPrint() {
+        int toReturn = roll();
+
+        final String message = String.format(SystemText.DICE_ROLL, name, toReturn);
         MessageLog.addMessage(message, true);
+
+        return toReturn;
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import init.featureBanks.RoomFeatureBanks;
 import lombok.Data;
 import model.blocks.Feature;
 import text.RoomFlavourText;
@@ -24,14 +25,30 @@ public class Room {
     }
 
     public String describe() {
+        List<Feature> featuresToDescribe = new ArrayList<>();
+
+        for (int i = 0; i < featureList.size(); i++) {
+            if (featureList.get(i).isKnown()) {
+                featuresToDescribe.add(featureList.get(i));
+            }
+        }
+
+        return proceedWithDescription(featuresToDescribe);
+    }
+
+    private String proceedWithDescription(List<Feature> featureList) {
         StringBuilder description = new StringBuilder();
 
         description.append(RoomFlavourText.INITIAL);
 
         if (featureList != null && !featureList.isEmpty()) {
             for (int i = 0; i < featureList.size(); i++) {
-                if (i != 0) {
-                    description.append(SystemText.AND);
+                if (i != 0)  {
+                    if (i != featureList.size() - 1) {
+                        description.append(SystemText.COMMA);
+                    } else {
+                        description.append(SystemText.AND);
+                    }
                 }
                 description.append(featureList.get(i).getSeverity());
             }
