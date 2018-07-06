@@ -1,7 +1,5 @@
 package mainlogic;
 
-import generation.Generator;
-import model.Room;
 import text.SystemText;
 import utils.messagelog.MessageLog;
 
