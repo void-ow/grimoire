@@ -1,8 +1,8 @@
 package generation;
 
 import init.Database;
-import model.Thing;
 import model.blocks.Feature;
+import model.blocks.Thing;
 import model.data.FeatureData;
 import model.data.ThingData;
 import text.SystemText;

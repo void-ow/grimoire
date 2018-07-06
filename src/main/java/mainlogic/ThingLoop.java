@@ -1,6 +1,6 @@
 package mainlogic;
 
-import model.Thing;
+import model.blocks.Thing;
 import text.SystemText;
 import utils.messagelog.MessageLog;
 

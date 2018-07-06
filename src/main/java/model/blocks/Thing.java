@@ -1,7 +1,6 @@
-package model;
+package model.blocks;
 
 import lombok.Data;
-import model.blocks.Feature;
 import text.DefaultFlavourText;
 import text.SystemText;
 

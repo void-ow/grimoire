@@ -1,7 +1,7 @@
 package generation;
 
 import init.Database;
-import model.Thing;
+import model.blocks.Thing;
 import org.junit.Before;
 import org.junit.Test;
 

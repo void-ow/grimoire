@@ -8,3 +8,5 @@
     severity:dirt,stone;
 {name:missile_trap_loaded;
     severity:not_loaded,loaded;
+{name:open;
+    severity:open,closed;

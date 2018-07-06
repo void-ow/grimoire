@@ -19,6 +19,7 @@ public class DataReader {
             String allData = IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(filename));
             allData = allData.replace("\n", "");
             allData = allData.replace(" ", "");
+            allData = allData.replace("_", " ");
             String[] things = allData.split("\\{");
 
             for (int i = 1; i < things.length; i++) {
@@ -58,6 +59,7 @@ public class DataReader {
             String allData = IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(filename));
             allData = allData.replace("\n", "");
             allData = allData.replace(" ", "");
+            allData = allData.replace("_", " ");
             String[] things = allData.split("\\{");
 
             for (int i = 1; i < things.length; i++) {

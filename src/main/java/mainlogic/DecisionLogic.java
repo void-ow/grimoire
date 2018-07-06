@@ -1,7 +1,7 @@
 package mainlogic;
 
 import generation.Generator;
-import model.Thing;
+import model.blocks.Thing;
 
 public class DecisionLogic {
 
