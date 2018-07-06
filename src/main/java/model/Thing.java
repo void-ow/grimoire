@@ -2,6 +2,8 @@ package model;
 
 import lombok.Data;
 import model.blocks.Feature;
+import text.DefaultFlavourText;
+import text.SystemText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,37 +23,64 @@ public class Thing {
         features = new ArrayList<>();
     }
 
-    public String describeFully() {
-        StringBuilder description = new StringBuilder("This is ");
-        return description.append(getFullDescription()).toString();
-    }
-
     public String describe() {
-        StringBuilder description = new StringBuilder("This is ");
+        StringBuilder description = new StringBuilder(DefaultFlavourText.INITIAL);
         return description.append(getShortDescription()).toString();
     }
 
-    private String getFullDescription() {
-        StringBuilder description = new StringBuilder("a ");
-        for (Feature feature : features) {
-            description.append(feature.getSeverity()).append(" ");
-        }
-        description.append(name).append(". ");
-        for (Thing child : children.values()) {
-            description.append("It has ").append(child.getFullDescription());
+    private String getShortDescription() {
+        StringBuilder description = getNameWithQualities()
+                .append(SystemText.END);
+
+        // Describe it's children Things
+
+        if (!children.isEmpty()) {
+            description
+                    .append(SystemText.SPACE)
+                    .append(DefaultFlavourText.DESCRIBE_CHILD);
+
+            for (Thing child : children.values()) {
+                description.append(child.getNameWithQualities()).append(SystemText.COMMA);
+            }
+
+            // Delete that last comma
+            description.replace(
+                    description.lastIndexOf(SystemText.COMMA),
+                    description.lastIndexOf(SystemText.COMMA) + 1,
+                    ".");
+
         }
         return description.toString();
     }
 
-    private String getShortDescription() {
-        StringBuilder description = new StringBuilder("a ");
+    private StringBuilder getNameWithQualities() {
+        // Add a prefix
+        StringBuilder description = new StringBuilder(DefaultFlavourText.A);
+        // Add each feature
         for (Feature feature : features) {
-            description.append(feature.getSeverity()).append(" ");
+            description
+                    .append(SystemText.SPACE)
+                    .append(feature.getSeverity());
         }
-        description.append(name).append(". ");
-        description.append("It has ");
+
+        // Add a Thing's name
+        description
+                .append(SystemText.SPACE)
+                .append(name);
+        return description;
+    }
+
+    public String describeFully() {
+        StringBuilder description = new StringBuilder(DefaultFlavourText.INITIAL);
+        return description.append(getFullDescription()).toString();
+    }
+
+    private String getFullDescription() {
+        // Add a prefix
+        StringBuilder description = getNameWithQualities();
+
         for (Thing child : children.values()) {
-            description.append("a ").append(child.getName()).append(", ");
+            description.append("It has ").append(child.getFullDescription());
         }
         return description.toString();
     }

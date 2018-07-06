@@ -4,7 +4,8 @@ public class SystemText {
 
     public static final String AND = " and ";
     public static final String END = ".";
-    public static final String COMMA = ", ";
+    public static final String COMMA = ",";
+    public static final String SPACE = " ";
 
     public static final String UNKNOWN = "UNKNOWN";
 

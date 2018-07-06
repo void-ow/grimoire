@@ -1,14 +1,14 @@
 package generation;
 
-import init.featureBanks.RoomFeatureBanks;
-import model.Room;
+import init.Database;
+import model.Thing;
 import org.junit.Before;
 import org.junit.Test;
 
-import static generation.Generator.generateRoom;
+import static generation.Generator.generateThing;
+import static java.util.Optional.empty;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,16 +16,16 @@ public class GeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        RoomFeatureBanks.initialize();
+        Database.initialize();
     }
 
     @Test
     public void generateRoomTest() {
         //given
         //when
-        Room generatedRoom = generateRoom();
+        Thing generatedRoom = generateThing("room");
         //then
-        assertThat(generatedRoom.getFeatureList(), is(not(nullValue())));
-        assertThat(generatedRoom.getFeatureList(), is(not(empty())));
+        assertThat(generatedRoom.getFeatures(), is(not(nullValue())));
+        assertThat(generatedRoom.getFeatures(), is(not(empty())));
     }
 }

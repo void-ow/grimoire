@@ -7,13 +7,13 @@ import model.data.FeatureData;
 import model.data.ThingData;
 import text.SystemText;
 import utils.dice.BaseDie;
+import utils.dice.DTwenty;
 
 import java.util.List;
 
 public class Generator {
 
     private static final int FEATURE_GENERATION_THRESHOLD = 15;
-    private static final int PERCEPTION_FLOOR = 14;
 
     public static Thing generateThing(String name) {
 
@@ -68,8 +68,12 @@ public class Generator {
                 List<String> thingsByTags = Database.thingsByTags.get(tag);
                 if (thingsByTags != null && thingsByTags.size() != 0) {
                     for (String thingFromTag : thingsByTags) {
-                        Thing generatedChild = generateThing(thingFromTag);
-                        generated.getChildren().put(thingFromTag, generatedChild);
+                        // Randomly generate
+                        // or don't
+                        if (DTwenty.roll() >= FEATURE_GENERATION_THRESHOLD) {
+                            Thing generatedChild = generateThing(thingFromTag);
+                            generated.getChildren().put(thingFromTag, generatedChild);
+                        }
                     }
                 } else {
                     System.out.println("Generation Warning: Tag " + tag + " does not have any Things associated with it");
