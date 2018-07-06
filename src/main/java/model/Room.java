@@ -17,13 +17,6 @@ public class Room {
     public Room() {
     }
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "featureList=" + featureList +
-                '}';
-    }
-
     public String describe() {
         List<Feature> featuresToDescribe = new ArrayList<>();
 

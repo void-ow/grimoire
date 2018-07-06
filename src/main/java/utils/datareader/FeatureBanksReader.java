@@ -25,7 +25,7 @@ public class FeatureBanksReader {
                     severities.add(data[j]);
                 }
 
-                FeatureBank featureBank = new FeatureBank(data[0], severities);
+                FeatureBank featureBank = new FeatureBank(data[0].replace("\n",""), severities);
                 toReturn.add(featureBank);
             }
         } catch (IOException e) {

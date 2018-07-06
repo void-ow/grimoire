@@ -1,5 +1,6 @@
 package generation;
 
+import mainlogic.light.LightManager;
 import model.Room;
 import model.blocks.Feature;
 import model.blocks.FeatureBank;
@@ -24,6 +25,8 @@ public class Generator {
                 addFeatureBankToRoomWithRandomDifficulty(generated, roomFeatureBanks.get(i));
             }
         }
+
+        LightManager.hideFeatures(generated);
 
         return generated;
     }

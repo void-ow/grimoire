@@ -18,7 +18,7 @@ public class Feature {
 
     public Feature(FeatureBank featureBank) {
         name = featureBank.getName();
-        severity = featureBank.getSeverities().get(BaseDie.roll(featureBank.getSeverities().size() - 1));
+        severity = featureBank.getSeverities().get(BaseDie.roll(featureBank.getSeverities().size()) - 1);
     }
 
     @Override
