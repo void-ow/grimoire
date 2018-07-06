@@ -1,0 +1,10 @@
+{name:light;
+    severity:pitch-black,lit;
+{name:size;
+    severity:small,big;
+{name:material;
+    severity:wood,stone;
+{name:ground_type;
+    severity:dirt,stone;
+{name:missile_trap_loaded;
+    severity:not_loaded,loaded;
