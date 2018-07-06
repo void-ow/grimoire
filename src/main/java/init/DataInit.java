@@ -6,5 +6,6 @@ public class DataInit {
 
     public static void initialize() {
         RoomFeatureBanks.initialize();
+        Database.initialize();
     }
 }
