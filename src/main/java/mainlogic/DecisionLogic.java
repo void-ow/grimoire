@@ -2,9 +2,6 @@ package mainlogic;
 
 import generation.Generator;
 import model.Thing;
-import utils.messagelog.MessageLog;
-
-import java.util.List;
 
 public class DecisionLogic {
 
@@ -15,14 +12,10 @@ public class DecisionLogic {
         }
     }
 
-    public static void handleDecisionForRoom(String decision, Thing room) {
-        if (decision.equalsIgnoreCase("wall")) {
-            List<Thing> children = room.getChildren();
-            for (int i = 0; i < children.size(); i++) {
-                if (children.get(i).getName().equalsIgnoreCase("wall")) {
-                    MessageLog.addMessage(children.get(i).describe(), true);
-                }
-            }
+    public static void handleDecisionForThing(String decision, Thing thing) {
+
+        if (thing.getChildren().containsKey(decision)) {
+            ThingLoop.loop(thing.getChildren().get(decision));
         }
     }
 }

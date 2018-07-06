@@ -55,7 +55,7 @@ public class Generator {
         if (children != null && children.size() != 0) {
             for (String child : children) {
                 Thing generatedChild = generateThing(child);
-                generated.getChildren().add(generatedChild);
+                generated.getChildren().put(child, generatedChild);
             }
         } else {
             System.out.println("Generation Warning: " + name + " does not have any children");
@@ -69,7 +69,7 @@ public class Generator {
                 if (thingsByTags != null && thingsByTags.size() != 0) {
                     for (String thingFromTag : thingsByTags) {
                         Thing generatedChild = generateThing(thingFromTag);
-                        generated.getChildren().add(generatedChild);
+                        generated.getChildren().put(thingFromTag, generatedChild);
                     }
                 } else {
                     System.out.println("Generation Warning: Tag " + tag + " does not have any Things associated with it");
