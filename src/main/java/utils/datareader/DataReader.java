@@ -3,6 +3,7 @@ package utils.datareader;
 import model.data.FeatureData;
 import model.data.ThingData;
 import org.apache.commons.io.IOUtils;
+import text.SystemText;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class DataReader {
                 String[] properties = things[i].split("\\;");
 
                 String name = getStringFromProperties(properties, 0);
-                if (name.equalsIgnoreCase("UNKNOWN")) {
+                if (name.equalsIgnoreCase(SystemText.UNKNOWN)) {
                     System.out.println("Data parse warning: no name for thing #" + i);
                 }
 
@@ -63,7 +64,7 @@ public class DataReader {
                 String[] properties = things[i].split("\\;");
 
                 String name = getStringFromProperties(properties, 0);
-                if (name.equalsIgnoreCase("UNKNOWN")) {
+                if (name.equalsIgnoreCase(SystemText.UNKNOWN)) {
                     System.out.println("Data parse warning: no name for feature #" + i);
                 }
 

@@ -1,16 +1,16 @@
 package mainlogic;
 
-import model.Room;
+import model.Thing;
 import text.SystemText;
 import utils.messagelog.MessageLog;
 
 import java.util.Scanner;
 
-public class RoomLoop {
+public class ThingLoop {
 
     private static boolean toStop;
 
-    public static void loop(Room room) {
+    public static void loop(Thing room) {
         while (!toStop) {
             MessageLog.addMessage("You are currently in a room.", true);
             MessageLog.addMessage(room.describe(), true);
