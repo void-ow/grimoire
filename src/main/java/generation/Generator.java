@@ -37,6 +37,10 @@ public class Generator {
             if (featureDataFromDB != null) {
 
                 List<String> severities = featureDataFromDB.getSeverities();
+                // If there's an additional flavour text, swap out severities text with it
+                if (featureDataFromDB.getFlavourText() != null && featureDataFromDB.getFlavourText().size() != 0) {
+                    severities = featureDataFromDB.getFlavourText();
+                }
 
                 if (severities != null && severities.size() != 0) {
                     severity = severities.get(BaseDie.roll(severities.size()) - 1);

@@ -1,0 +1,11 @@
+THINGS: Various objects that represent the world. They can have multiple other children THINGS.
+That represents the hierarchical structure of the world.
+
+FEATURES: qualities of THINGS that explain more about the THING in question. These qualities are required to exist.
+In the moment of generation of a THING, it is assigned a random SEVERITY of a FEATURE. That way, every THING will be different.
+
+SEVERITY: description of a FEATURE, that explains, well, the severity of it. THING will be described in the following way:
+
+This appears to be (a/an) (SEVERITY, SEVERITY ...) (THING NAME). It has (a/an) (SEVERITY, SEVERITY, ...) (CHILD THING), (a/an) (SEVERITY, SEVERITY, ...) (CHILD THING) ... .
+
+FLAVOUR TEXT: additional text to better describe a particular severity.

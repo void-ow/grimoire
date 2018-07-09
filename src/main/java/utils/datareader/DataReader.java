@@ -63,17 +63,32 @@ public class DataReader {
             String[] things = allData.split("\\{");
 
             for (int i = 1; i < things.length; i++) {
+                FeatureData featureData = new FeatureData();
+
                 String[] properties = things[i].split("\\;");
 
                 String name = getStringFromProperties(properties, 0);
+                featureData.setName(name);
                 if (name.equalsIgnoreCase(SystemText.UNKNOWN)) {
                     System.out.println("Data parse warning: no name for feature #" + i);
                 }
 
                 List<String> severities = getListStringFromProperties(properties, 1);
                 validateResult(name, severities, "severities");
+                featureData.setSeverities(severities);
 
-                toReturn.add(new FeatureData(name, severities));
+                if (properties.length > 2) {
+                    List<String> flavourText = getListStringFromProperties(properties, 2);
+                    validateResult(name, flavourText, "flavour text");
+
+                    if (severities.size() == flavourText.size()) {
+                        featureData.setFlavourText(flavourText);
+                    } else {
+                        System.out.println("Data parse error: flavour text size is not equal to severity text size.");
+                    }
+                }
+
+                toReturn.add(featureData);
             }
         } catch (IOException e) {
             e.printStackTrace();

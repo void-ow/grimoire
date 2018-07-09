@@ -1,5 +1,6 @@
 {name:light;
     severity:pitch-black,lit;
+    flavourText:completely_pitch-black,fully_lit;
 {name:size;
     severity:small,big;
 {name:material;
