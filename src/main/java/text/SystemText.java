@@ -13,4 +13,9 @@ public class SystemText {
 
     public static final String MAIN_LOOP = "Debug Menu";
     public static final String ACTION_LOOP = "What do you want to do?";
+    public static final String UNKNOWN_COMMAND = "This command is unknown.";
+
+    public class Commands {
+        public static final String LOOK = "look";
+    }
 }

@@ -2,6 +2,10 @@ package mainlogic;
 
 import generation.Generator;
 import model.blocks.Thing;
+import text.SystemText;
+import utils.messagelog.MessageLog;
+
+import static text.SystemText.Commands.LOOK;
 
 public class DecisionLogic {
 
@@ -14,8 +18,33 @@ public class DecisionLogic {
 
     public static void handleDecisionForThing(String decision, Thing thing) {
 
-        if (thing.getChildren().containsKey(decision)) {
-            ThingLoop.loop(thing.getChildren().get(decision));
+        String[] command = decision.split("\\ ");
+
+        if (command.length <= 1) {
+            MessageLog.addMessage(SystemText.UNKNOWN_COMMAND, true);
+        } else {
+
+            String notation = command[0];
+            String thingName = getThingName(command);
+
+            if (notation.equalsIgnoreCase(LOOK)) {
+
+                if (thing.getChildren().containsKey(thingName)) {
+                    ThingLoop.loop(thing.getChildren().get(thingName));
+                }
+            }
         }
+    }
+
+    private static String getThingName(String[] command) {
+        StringBuilder thingName = new StringBuilder();
+        for (int i = 1; i < command.length; i++) {
+            if (i != 1) {
+                thingName.append(SystemText.SPACE).append(command[i]);
+            } else {
+                thingName.append(command[i]);
+            }
+        }
+        return thingName.toString();
     }
 }

@@ -21,7 +21,7 @@ public class ThingLoop {
 
             DecisionLogic.handleDecisionForThing(input, thing);
 
-            if (input.equalsIgnoreCase("stop")) {
+            if (input.equalsIgnoreCase("back")) {
                 toStop = true;
             }
         }
