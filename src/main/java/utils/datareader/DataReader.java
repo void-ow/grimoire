@@ -42,7 +42,10 @@ public class DataReader {
                 List<String> features = getListStringFromProperties(properties, 4);
                 validateResult(name, features, "features");
 
-                toReturn.add(new ThingData(name, tags, children, optionalTags, features));
+                List<String> checks = getListStringFromProperties(properties, 5);
+                validateResult(name, checks, "checks");
+
+                toReturn.add(new ThingData(name, tags, children, optionalTags, features, checks));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,19 +77,22 @@ public class DataReader {
                 }
 
                 List<String> severities = getListStringFromProperties(properties, 1);
-                validateResult(name, severities, "severities");
+                validateResultCustom(name, severities, "severities", "feature");
                 featureData.setSeverities(severities);
 
-                if (properties.length > 2) {
-                    List<String> flavourText = getListStringFromProperties(properties, 2);
-                    validateResult(name, flavourText, "flavour text");
+                List<String> flavourText = getListStringFromProperties(properties, 2);
+                validateResultCustom(name, flavourText, "flavour text", "feature");
 
-                    if (severities.size() == flavourText.size()) {
-                        featureData.setFlavourText(flavourText);
-                    } else {
+                if (severities.size() == flavourText.size()) {
+                    featureData.setFlavourText(flavourText);
+                } else {
+                    if (flavourText.size() != 0) {
                         System.out.println("Data parse error: flavour text size is not equal to severity text size.");
                     }
                 }
+
+                String system = getStringFromProperties(properties, 3);
+                featureData.setSystem(Boolean.parseBoolean(system));
 
                 toReturn.add(featureData);
             }
@@ -100,6 +106,12 @@ public class DataReader {
     private static void validateResult(String name, List<String> stringList, String parameter) {
         if (stringList.size() == 0) {
             System.out.println(String.format("Data parse warning: no %s for thing %s", parameter, name));
+        }
+    }
+
+    private static void validateResultCustom(String name, List<String> stringList, String parameter, String custom) {
+        if (stringList.size() == 0) {
+            System.out.println(String.format("Data parse warning: no %s for %s %s", parameter, custom, name));
         }
     }
 

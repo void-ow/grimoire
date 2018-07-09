@@ -7,19 +7,12 @@ public class Feature {
 
     private String name;
     private String severity;
-    private boolean known;
-    private int difficulty;
+    private boolean system;
 
-    public Feature(String name, String severity) {
+    public Feature(String name, String severity, boolean system) {
         this.name = name;
         this.severity = severity;
+        this.system = system;
     }
 
-    @Override
-    public String toString() {
-        return "Feature{" +
-                "name='" + name + '\'' +
-                ", severity='" + severity + '\'' +
-                '}';
-    }
 }

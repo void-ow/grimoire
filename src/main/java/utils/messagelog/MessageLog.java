@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MessageLog {
 
-    public static int MAX_LENGTH = 8;
+    public static int MAX_LENGTH = 20;
     public static List<String> messages = new ArrayList<>();
 
     public static void addMessage(String message, boolean display) {

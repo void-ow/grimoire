@@ -1,6 +1,7 @@
 package generation;
 
 import init.Database;
+import model.Check;
 import model.blocks.Feature;
 import model.blocks.Thing;
 import model.data.FeatureData;
@@ -33,6 +34,7 @@ public class Generator {
 
             String severity = SystemText.UNKNOWN;
             FeatureData featureDataFromDB = Database.features.get(featureName);
+            boolean system = featureDataFromDB.isSystem();
 
             if (featureDataFromDB != null) {
 
@@ -51,7 +53,13 @@ public class Generator {
                 System.out.println("Generation Warning: Can't find feature " + featureName);
             }
 
-            generated.getFeatures().add(new Feature(featureName, severity));
+            generated.getFeatures().put(featureName, new Feature(featureName, severity, system));
+        }
+
+        // Get Thing's checks
+        List<String> checks = data.getChecks();
+        for (String check : checks) {
+            generated.getChecks().put(check, new Check(check));
         }
 
         // Get Thing's children and generate them randomly.

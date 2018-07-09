@@ -1,25 +1,29 @@
 package model.blocks;
 
 import lombok.Data;
+import mainlogic.FeatureLogic;
+import model.Check;
 import text.DefaultFlavourText;
 import text.SystemText;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import static text.SystemText.ImmutableFeatures.HIDDEN;
 
 @Data
 public class Thing {
 
     private String name;
     private Map<String, Thing> children;
-    private List<Feature> features;
+    private Map<String, Feature> features;
+    private Map<String, Check> checks;
 
     public Thing(String name) {
         this.name = name;
         children = new HashMap<>();
-        features = new ArrayList<>();
+        features = new HashMap<>();
+        checks = new HashMap<>();
     }
 
     public String describe() {
@@ -33,12 +37,15 @@ public class Thing {
 
         // Describe it's children Things
 
-        if (!children.isEmpty()) {
+        // Hide children that have "hidden" feature with the correct severity
+        Map<String, Thing> childrenToShow = hideChildren();
+
+        if (!childrenToShow.isEmpty()) {
             description
                     .append(SystemText.SPACE)
                     .append(DefaultFlavourText.DESCRIBE_CHILD);
 
-            for (Thing child : children.values()) {
+            for (Thing child : childrenToShow.values()) {
                 description.append(child.getNameWithQualities()).append(SystemText.COMMA);
             }
 
@@ -46,20 +53,36 @@ public class Thing {
             description.replace(
                     description.lastIndexOf(SystemText.COMMA),
                     description.lastIndexOf(SystemText.COMMA) + 1,
-                    ".");
+                    SystemText.END);
 
         }
         return description.toString();
+    }
+
+    private Map<String, Thing> hideChildren() {
+        Map<String, Thing> childrenToShow = new HashMap<>();
+
+        for (Thing child : children.values()) {
+
+            if (!FeatureLogic.isSeverityEqualTo(child.getFeatures(), HIDDEN, HIDDEN)) {
+                childrenToShow.put(child.name, child);
+            }
+
+        }
+        return childrenToShow;
     }
 
     private StringBuilder getNameWithQualities() {
         // Add a prefix
         StringBuilder description = new StringBuilder(DefaultFlavourText.A);
         // Add each feature
-        for (Feature feature : features) {
-            description
-                    .append(SystemText.SPACE)
-                    .append(feature.getSeverity());
+        for (Feature feature : features.values()) {
+            // 'cept for system ones
+            if (!feature.isSystem()) {
+                description
+                        .append(SystemText.SPACE)
+                        .append(feature.getSeverity());
+            }
         }
 
         // Add a Thing's name

@@ -17,5 +17,14 @@ public class SystemText {
 
     public class Commands {
         public static final String LOOK = "look";
+        public static final String CHECK = "check";
+    }
+
+    public class Abbreviations {
+        public static final String PERCEPTION = "PER";
+    }
+
+    public class ImmutableFeatures {
+        public static final String HIDDEN = "hidden";
     }
 }
